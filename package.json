@@ -1,0 +1,24 @@
+{
+  "name": "www.spee.ch",
+  "version": "0.0.1",
+  "description": "A web app that uses the spee.ch codebase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbryio/www.spee.ch.git"
+  },
+  "keywords": [
+    "lbry",
+    "blockchain",
+    "spee.ch"
+  ],
+  "author": "@billbitt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lbryio/www.spee.ch/issues"
+  },
+  "homepage": "https://github.com/lbryio/www.spee.ch#readme"
+}
