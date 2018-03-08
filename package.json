@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/lbryio/www.spee.ch#readme",
   "dependencies": {
-    "speech": "https://github.com/lbryio/spee.ch/tree/speech-as-a-service"
+    "spee.ch": "git://github.com/lbryio/spee.ch.git#speech-as-a-service"
   }
 }
