@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/lbryio/www.spee.ch/issues"
   },
-  "homepage": "https://github.com/lbryio/www.spee.ch#readme"
+  "homepage": "https://github.com/lbryio/www.spee.ch#readme",
+  "dependencies": {
+    "speech": "https://github.com/lbryio/spee.ch/tree/speech-as-a-service"
+  }
 }
