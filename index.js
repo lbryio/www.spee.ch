@@ -2,7 +2,7 @@
 const speech = require('spee.ch');
 
 // get config files
-const config = require('./config.js')
+const config = require('./config')
 
 // run speech
 server = new speech(config);
