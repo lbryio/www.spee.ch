@@ -5,5 +5,6 @@ const speech = require('spee.ch');
 const config = require('./config.js')
 
 // run speech
-speech.speak('hello world');
-speech.start(config);
+server = new speech(config);
+server.speak('hello world');
+server.start();
