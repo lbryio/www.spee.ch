@@ -15,10 +15,10 @@ module.exports = {
         host       : 'https://dev1.spee.ch',
         description: 'Open-source, decentralized image and video sharing.',
     },
-    openGraph: {
-        defaultClaimTitle      : 'dev1 Spee.ch',
-        defaultClaimThumbnail  : 'https://spee.ch/assets/img/video_thumb_default.png',
-        defaultClaimDescription: 'Open-source, decentralized image and video sharing.',
+    assetDefaults: {
+        title      : 'dev1 Spee.ch',
+        thumbnail  : 'https://spee.ch/assets/img/video_thumb_default.png',
+        description: 'Open-source, decentralized image and video sharing.',
     },
     session: {
         sessionKey: 'nans$#kfjanwe234rydns',
