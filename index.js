@@ -4,7 +4,14 @@ const speech = require('spee.ch');
 // get config files
 const config = require('./config')
 
-// run speech
+console.log('creating speech server');
+// create a new spee.ch server
 server = new speech(config);
-server.speak('hello world');
-server.start();
+
+// run speech
+try {
+    console.log('starting speech server');
+    server.start();
+} catch (error) {
+    console.log('spee.ch server error:', error);
+}

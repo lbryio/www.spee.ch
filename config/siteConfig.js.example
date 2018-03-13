@@ -1,0 +1,27 @@
+module.exports = {
+    analytics: {
+        googleId: null,  // insert your google ID or leave 'null'
+    },
+    assetDefaults: {
+        title      : 'dev1 Spee.ch',
+        thumbnail  : 'https://spee.ch/assets/img/video_thumb_default.png',
+        description: 'Open-source, decentralized image and video sharing.',
+    },
+    auth: {
+        sessionKey: 'example',  // add a secret string to be your session key
+    },
+    details: {
+        title      : 'Spee.ch',
+        host       : 'https://dev1.spee.ch',
+        description: 'Open-source, decentralized image and video sharing.',
+    },
+    publishing: {
+        additionalClaimAddresses: [], // optional
+        disabled                : false, // change to 'true' to disable publishing
+        disabledMessage         : 'Please check back soon.',
+        primaryClaimAddress     : '',  // choose an address from your lbry wallet
+        thumbnailChannel        : '@example',  // create a channel to host you thubnails
+        thumbnailChannelId      : '',  // use the channel id for your thumbnail channel
+        uploadDirectory         : '/home/lbry/Uploads',  // adjust this file path as necessary
+    },
+};
