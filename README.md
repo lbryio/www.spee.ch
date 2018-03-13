@@ -2,6 +2,8 @@
 
 ## installation
 * run `npm install`
-* create a copy of mysqlConfig.js.example with your mysql credentials
+* create config files in the `/config` folder
+  * create 'mysqlConfig.js'
+  * create 'siteConfig.js'
+  * create 'slackConfig.js'
 * run `npm start`
-
