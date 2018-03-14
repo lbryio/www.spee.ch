@@ -11,6 +11,7 @@ module.exports = {
         sessionKey: 'example',  // add a secret string to be your session key
     },
     details: {
+        port       : 3000,
         title      : 'Spee.ch',
         host       : 'https://dev1.spee.ch',
         description: 'Open-source, decentralized image and video sharing.',
