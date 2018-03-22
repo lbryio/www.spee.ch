@@ -3,4 +3,4 @@
 config/mysqlConfig.js
 config/siteConfig.js
 config/slackConfig.js
-index.js
+./index.js
