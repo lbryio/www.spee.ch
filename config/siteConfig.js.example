@@ -16,6 +16,15 @@ module.exports = {
         host       : 'https://dev1.spee.ch',
         description: 'Open-source, decentralized image and video sharing.',
     },
+    customComponents: {  // if you create custom components, containers, or pages, require them here to override the defaults
+        components: {},
+        containers: {},
+        pages: {
+            HomePage: require('../client/pages/HomePage');  // example custom homepage import
+        },
+    },
+    customRoutes: null, // tbd: will allow for custom routes to be configured
+    customModels: null, // tbd: will allow for custom models to be configured
     publishing: {
         additionalClaimAddresses: [], // optional
         disabled                : false, // change to 'true' to disable publishing
