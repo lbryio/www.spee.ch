@@ -1,3 +1,7 @@
+const customPages = require('../client/pages');
+const customContainers = require('../client/containers');
+const customComponents = require('../client/components');
+
 module.exports = {
     analytics: {
         googleId: null,  // insert your google ID or leave 'null'
@@ -15,16 +19,11 @@ module.exports = {
         title      : 'Spee.ch',
         host       : 'https://dev1.spee.ch',
         description: 'Open-source, decentralized image and video sharing.',
+        twitter    : '@billbitt.spee.ch',
     },
-    customComponents: {  // if you create custom components, containers, or pages, require them here to override the defaults
-        components: {},
-        containers: {},
-        pages: {
-            HomePage: require('../client/pages/HomePage');  // example custom homepage import
-        },
-    },
-    customRoutes: null, // tbd: will allow for custom routes to be configured
-    customModels: null, // tbd: will allow for custom models to be configured
+    customPages,
+    customComponents,
+    customContainers,
     publishing: {
         additionalClaimAddresses: [], // optional
         disabled                : false, // change to 'true' to disable publishing
@@ -33,5 +32,8 @@ module.exports = {
         thumbnailChannel        : '@example',  // create a channel to host you thubnails
         thumbnailChannelId      : '',  // use the channel id for your thumbnail channel
         uploadDirectory         : '/home/lbry/Uploads',  // adjust this file path as necessary
+    },
+    routes: {
+        publicFolder: 'public',
     },
 };

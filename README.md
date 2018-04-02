@@ -1,15 +1,16 @@
-# www.spee.ch
+# billbitt.spee.ch
 
 ## about
-`www.spee.ch` is an implementation of the [spee.ch package](https://github.com/lbryio/spee.ch#speech-as-a-package).
-This is the code base that is running on [staging.spee.ch](https://staging.spee.ch).  You can run your own version of spee.ch by importing the [spee.ch package](https://github.com/lbryio/spee.ch#speech-as-a-package) and passing it your own custom components.
+`billbitt.spee.ch` is an implementation of the [spee.ch package](https://github.com/lbryio/spee.ch#speech-as-a-package).
+The goal of this project is to provide an example of how you can import and configure spee.ch to quickly and easily create your own spee.ch-like website.  
 
 ## installation
-0. create files in `config/`
 
-  * create `mysqlConfig.js` from `mysqlConfig.js.example` and fill in the variables
-  * create `siteConfig.js` from `siteConfig.js.example` and fill in the variables
-  * create `slackConfig.js` from `slackConfig.js.example` and fill in the variables
+0. configure config files in `config/`
+
+  * create `mysqlConfig.js` from `mysqlConfig.js.example` 
+  * create `siteConfig.js` from `siteConfig.js.example` 
+  * create `slackConfig.js` from `slackConfig.js.example`
 
 1. install dependencies
 ```

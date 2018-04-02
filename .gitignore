@@ -1,6 +1,6 @@
 /.idea
 /node_modules
+config/loggerConfig.js
 config/mysqlConfig.js
 config/siteConfig.js
 config/slackConfig.js
-./index.js
