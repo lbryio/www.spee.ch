@@ -1,5 +1,1 @@
-import Logo from './Logo';
-
-module.exports = {
-    Logo,
-};
+module.exports = {};
