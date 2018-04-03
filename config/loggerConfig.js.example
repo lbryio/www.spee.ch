@@ -1,0 +1,3 @@
+module.exports = {
+  logLevel: 'debug',  // this determines which level of logs will be outputted to the server logs.  Options: 'error', 'warn', 'info', 'verbose', 'debug' , 'silly'.  These levels ascend from most important to least important, and your choice will also display all levels below it.  see https://github.com/winstonjs/winston#logging
+};

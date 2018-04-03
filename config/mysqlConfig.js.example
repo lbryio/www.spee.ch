@@ -1,5 +1,5 @@
 module.exports = {
-    database: '',  // name of mysql database
-    username: '',  // username for mysql
-    password: '',  // password for mysql
+    database: '',  // enter the name of  your mysql database
+    username: '',  // enter the username for your mysql database
+    password: '',  // enter the password for your mysql database
 }

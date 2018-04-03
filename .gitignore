@@ -1,6 +1,10 @@
-/.idea
-/node_modules
+.idea/
+node_modules/
+config/loggerConfig.js
 config/mysqlConfig.js
 config/siteConfig.js
 config/slackConfig.js
-./index.js
+index.js
+index.js.map
+public/bundle/bundle.js
+public/bundle/bundle.js.map
