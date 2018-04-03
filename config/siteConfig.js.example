@@ -4,36 +4,39 @@ const customComponents = require('../client/components');
 
 module.exports = {
     analytics: {
-        googleId: null,  // insert your google ID or leave 'null'
+        googleId: null,  // insert your google ID to track user interactions, or leave 'null'
     },
     assetDefaults: {
-        title      : 'dev1 Spee.ch',
-        thumbnail  : 'https://spee.ch/assets/img/video_thumb_default.png',
-        description: 'Open-source, decentralized image and video sharing.',
+        title      : 'dev1 Spee.ch',  // this is the default title that will display when someone shares a link to content on your site on social media
+        description: 'Open-source, decentralized image and video sharing.', // this is the default title that will display when someone shares a link to content on your site on social media
+        thumbnail  : 'https://spee.ch/assets/img/video_thumb_default.png',  // this is the default thumbnail that is used for videos displayed on your site
     },
     auth: {
-        sessionKey: 'example',  // add a secret string to be your session key
+        sessionKey: 'example',  // add a secret word instead of 'example'.  this will be the session key used to authenticate users on your site
     },
     details: {
-        port       : 3000,  // update to start server listening on a different port
+        port       : 3000,  // update this to start your server listening on a different port
         title      : 'My Spee.ch', // the title for your site
-        host       : 'http://localhost:3000', // the host for your site
-        description: 'My decentralized image and video sharing platform',  // description for your site
+        host       : 'http://localhost:3000', // the host for your site (note: this is used to set links within your site; it will not point the host toward your site)
+        description: 'My decentralized image and video sharing platform',  // description for your site (shows on the default nav bar)
         twitter    : null, // add the twitter handle for your site or leave 'null'
     },
     customPages,
     customComponents,
     customContainers,
     publishing: {
-        additionalClaimAddresses: [], // optional
-        disabled                : false, // change to 'true' to disable publishing
-        disabledMessage         : 'Please check back soon.',  // message displayed if you disable publishing
+        // you must complete the below mandatory fields before publishing will work
         primaryClaimAddress     : '',  // choose an address from your lbry wallet
+        uploadDirectory         : '/home/lbry/Uploads',  // this is where uploaded files will be stored on your server
+        // you must complete the below before video publishing will work
         thumbnailChannel        : '@example',  // create a channel to host you thubnails
         thumbnailChannelId      : '',  // use the channel id for your thumbnail channel
-        uploadDirectory         : '/home/lbry/Uploads',  // this is where uploaded files will be stored on your server
+        // optional fields
+        additionalClaimAddresses: [], // optionally add wallet addresses you have used to publish content from this site in the past
+        disabled                : false, // change to 'true' to disable publishing
+        disabledMessage         : 'Please check back soon.',  // message displayed if you disable publishing
     },
     routes: {
-        publicFolder: 'public',  // folder to serve static public assets from
+        publicFolder: 'public',  // folder to serve static public assets from; do not touch unless you know what you are doing ;] !
     },
 };
