@@ -15,11 +15,11 @@ module.exports = {
         sessionKey: 'example',  // add a secret string to be your session key
     },
     details: {
-        port       : 3000,
-        title      : 'Spee.ch',
-        host       : 'https://dev1.spee.ch',
-        description: 'Open-source, decentralized image and video sharing.',
-        twitter    : '@billbitt.spee.ch',
+        port       : 3000,  // update to start server listening on a different port
+        title      : 'My Spee.ch', // the title for your site
+        host       : 'http://localhost:3000', // the host for your site
+        description: 'My decentralized image and video sharing platform',  // description for your site
+        twitter    : null, // add the twitter handle for your site or leave 'null'
     },
     customPages,
     customComponents,
@@ -27,13 +27,13 @@ module.exports = {
     publishing: {
         additionalClaimAddresses: [], // optional
         disabled                : false, // change to 'true' to disable publishing
-        disabledMessage         : 'Please check back soon.',
+        disabledMessage         : 'Please check back soon.',  // message displayed if you disable publishing
         primaryClaimAddress     : '',  // choose an address from your lbry wallet
         thumbnailChannel        : '@example',  // create a channel to host you thubnails
         thumbnailChannelId      : '',  // use the channel id for your thumbnail channel
-        uploadDirectory         : '/home/lbry/Uploads',  // adjust this file path as necessary
+        uploadDirectory         : '/home/lbry/Uploads',  // this is where uploaded files will be stored on your server
     },
     routes: {
-        publicFolder: 'public',
+        publicFolder: 'public',  // folder to serve static public assets from
     },
 };
