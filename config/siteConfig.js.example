@@ -1,6 +1,6 @@
-const customPages = require('../client/pages');
-const customContainers = require('../client/containers');
-const customComponents = require('../client/components');
+const customPages = require('../custom/pages');
+const customContainers = require('../custom/containers');
+const customComponents = require('../custom/components');
 
 module.exports = {
     analytics: {
