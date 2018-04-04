@@ -7,8 +7,8 @@ module.exports = {
   target: 'web',
   entry : ['babel-polyfill', 'whatwg-fetch', './client.js'],
   output: {
-    path      : Path.join(__dirname, 'static/bundle/'),
-    publicPath: 'static/bundle/',
+    path      : Path.join(__dirname, 'public/bundle/'),
+    publicPath: 'public/bundle/',
     filename  : 'bundle.js',
   },
   module: {
