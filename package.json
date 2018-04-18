@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/lbryio/www.spee.ch#readme",
   "dependencies": {
-    "spee.ch-server": "git://github.com/lbryio/spee.ch.git#speech-as-a-package",
+    "spee.ch": "git://github.com/lbryio/spee.ch.git",
     "spee.ch-components": "git://github.com/lbryio/spee.ch-components.git"
   },
   "devDependencies": {
