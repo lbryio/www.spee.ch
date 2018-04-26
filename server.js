@@ -1,5 +1,5 @@
 // require the spee.ch package
-const Server = require('spee.ch-server');
+const Server = require('spee.ch');
 // get the local configs
 const loggerConfig = require('./config/loggerConfig.js'); // make these direct
 const mysqlConfig = require('./config/mysqlConfig.js');

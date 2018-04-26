@@ -44,5 +44,3 @@ hydrate(
     </Provider>,
     document.getElementById('react-app')
 );
-
-console.log('hello from billbitt.spee.ch client.js');
