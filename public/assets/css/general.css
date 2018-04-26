@@ -573,16 +573,16 @@ table {
 /*Stops border and padding showing in fullscreen*/
 
 video:-moz-full-screen {
-border:none;
-padding:0;
+	border:none;
+	padding:0;
 }
 video:-webkit-full-screen {
-border:none;
-padding:0;
+	border:none;
+	padding:0;
 }
 video:fullscreen {
-border:none;
-padding:0;
+	border:none;
+	padding:0;
 }
 
 /* show lite */
