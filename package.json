@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start-dev-server": "nodemon index.js",
     "start-dev": "builder concurrent build-dev start-dev-server",
+    "start-dev-server": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
     "build-dev": "webpack --config webpack.dev.js",
