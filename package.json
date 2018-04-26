@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start-dev": "nodemon index.js",
+    "start-dev-server": "nodemon index.js",
+    "start-dev": "builder concurrent build-dev start-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
     "build-dev": "webpack --config webpack.dev.js",
@@ -33,18 +34,19 @@
     "spee.ch-components": "git://github.com/lbryio/spee.ch-components.git"
   },
   "devDependencies": {
-    "nodemon": "^1.15.1",
-    "babel-polyfill": "^6.26.0",
-    "whatwg-fetch": "^2.0.3",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
+    "builder": "^4.0.0",
     "css-loader": "^0.28.9",
+    "nodemon": "^1.15.1",
     "webpack": "^3.10.0",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "whatwg-fetch": "^2.0.3"
   }
 }
