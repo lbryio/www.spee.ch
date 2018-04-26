@@ -31,7 +31,8 @@
   "homepage": "https://github.com/lbryio/www.spee.ch#readme",
   "dependencies": {
     "spee.ch": "git://github.com/lbryio/spee.ch.git",
-    "spee.ch-components": "git://github.com/lbryio/spee.ch-components.git"
+    "spee.ch-components": "git://github.com/lbryio/spee.ch-components.git",
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
