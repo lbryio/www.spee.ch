@@ -15,25 +15,25 @@ Spee.ch also runs a sync tool, which decodes blocks from the `LBRY` blockchain a
 
 ## Quick start
 
-### preparing your environment and app
+### Preparing your environment
 
-start mysql
+Start mysql
 
   * install mysql if needed
   * create a database
   * save the `database`, `username`, and `password` someplace handy
   
-start lbry
+Start lbry
 
   * install the [`lbry`](https://github.com/lbryio/lbry) daemon
   * start the `lbry` daemon
-
-Clone this rep
+  
+Clone this repo
 ```
 git clone https://github.com/lbryio/www.spee.ch.git
 ```
 
-configure config files in `config/`
+Configure the config files in `config/`
 
   * create `mysqlConfig.js` from `mysqlConfig.js.example` 
       * enter the mysql database and credentials created above
@@ -46,7 +46,7 @@ configure config files in `config/`
   * create custom components by creating React components in `custom/` (further instructions coming soon)
   * update the css by changing the files in `public/assets/css/` (further instructions and refactor coming soon) 
 
-### starting the app
+### Starting the app
 
 (1) install dependencies
 ```
@@ -63,3 +63,8 @@ npm run start
 (4) visit [localhost:3000](http://localhost:3000)
 
 (5) have fun
+
+### Syncing the blockchain
+Start the `spee.ch-sync` tool available at [billbitt/spee.ch-sync](https://github.com/billbitt/spee.ch-sync)
+
+This is not necessary, but highly reccomended.  It will decode the blocks of the `LBRY` blockchain and add the claims information to your database's tables
