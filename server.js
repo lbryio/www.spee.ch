@@ -4,16 +4,16 @@ const fs = require('fs');
 const Server = require('spee.ch');
 
 // get the local configs
-loggerConfigJSON = fs.readFileSync('./cli/output/loggerConfig.json');
+const loggerConfigJSON = fs.readFileSync('./cli/output/loggerConfig.json');
 const loggerConfig = JSON.parse(loggerConfigJSON);
 
-mysqlConfigJSON = fs.readFileSync('./cli/output/mysqlConfig.json');
+const mysqlConfigJSON = fs.readFileSync('./cli/output/mysqlConfig.json');
 const mysqlConfig = JSON.parse(mysqlConfigJSON);
 
-siteConfigJSON = fs.readFileSync('./cli/output/siteConfig.json');
+const siteConfigJSON = fs.readFileSync('./cli/output/siteConfig.json');
 const siteConfig = JSON.parse(siteConfigJSON);
 
-slackConfigJSON = fs.readFileSync('./cli/output/slackConfig.json');
+const slackConfigJSON = fs.readFileSync('./cli/output/slackConfig.json');
 const slackConfig = JSON.parse(slackConfigJSON);
 
 // get custom pages
