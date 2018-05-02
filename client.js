@@ -7,7 +7,7 @@ import createSagaMiddleware from 'redux-saga';
 import { Reducers, Sagas, GAListener, App } from 'spee.ch-components';
 
 // configure the reducers by passing initial state configs
-const siteConfig = require('siteConfig.js');
+const siteConfig = require('./_oldConfig/siteConfig');
 const MyReducers = Reducers(siteConfig);
 const MyApp = App(siteConfig);
 const MyGAListener = GAListener(siteConfig);

@@ -1,13 +1,13 @@
 const database = {
     type: 'input',
-    message: 'What is the name of the MySQL DATABASE to be used? (leave blank for default \'lbry\')',
+    message: 'What is the name of the MySQL DATABASE to be used?',
     default: 'lbry',
     name: 'database',
 };
 
 const username = {
     type: 'input',
-    message: 'What is the USER NAME for your MySQL database? (leave blank for default \'root\')',
+    message: 'What is the USER NAME for your MySQL database?',
     default: 'root',
     name: 'username',
 };

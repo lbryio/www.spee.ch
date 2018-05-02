@@ -76,7 +76,7 @@ const twitter = {
 const primaryClaimAddress = {
     type: 'input',
     message: 'Choose an address from your lbry wallet to publish from.',
-    default: 'test',
+    default: '',
     name: 'primaryClaimAddress',
 };
 

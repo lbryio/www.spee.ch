@@ -13,7 +13,7 @@ const slackErrorChannel = {
 };
 
 const slackInfoChannel = {
-    type: 'password',
+    type: 'input',
     message: 'Enter a slack channel (#info) for info level logs to be sent to.',
     default: false,
     name: 'slackInfoChannel',
