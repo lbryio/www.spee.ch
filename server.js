@@ -12,7 +12,7 @@ function findAndLoadConfig(path) {
 }
 
 // get custom pages
-const viewsConfig = require('./custom/views');
+const customViews = require('./custom/views');
 
 try {
     // create a new spee.ch server
@@ -27,7 +27,7 @@ try {
     server.configureMysql(mysqlConfig);
     server.configureSite(siteConfig);
     server.configureSlack(slackConfig);
-    server.configureViews(viewsConfig);
+    server.configureViews(customViews);
     // create the express app and configure it
     server.initialize();
     // sync the db and start express app listening on the configured port
