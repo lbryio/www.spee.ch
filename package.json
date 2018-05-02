@@ -4,15 +4,16 @@
   "description": "A web app that uses the spee.ch codebase",
   "main": "index.js",
   "scripts": {
+    "configure": "node cli/index.js",
+    "build": "webpack --config webpack.prod.js",
+    "build-dev": "webpack --config webpack.dev.js",
+    "build-dev-client": "webpack --config webpack.dev.client.js",
+    "build-dev-server": "webpack --config webpack.dev.server.js",
+    "pre-build-dev": "webpack --config webpack.dev.prebuild.js",
     "start": "node index.js",
     "start-dev": "builder concurrent build-dev start-dev-server",
     "start-dev-server": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.prod.js",
-    "build-dev": "webpack --config webpack.dev.js",
-    "pre-build-dev": "webpack --config webpack.dev.prebuild.js",
-    "build-dev-client": "webpack --config webpack.dev.client.js",
-    "build-dev-server": "webpack --config webpack.dev.server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
