@@ -1,15 +1,7 @@
-const fs = require('fs');
+const findAndLoadConfig = require('./utils/findAndLoadConfig.js');
 
 // require the spee.ch package
 const Server = require('spee.ch');
-
-function findAndLoadConfig(path) {
-    if (!fs.existsSync(path)){
-        throw new Error(`No config file found at ${path}.  Please run \'npm run configure\' to build your config files.`);
-    }
-    const JSONfile = fs.readFileSync(path);
-    return JSON.parse(JSONfile);
-}
 
 // get custom pages
 const customViews = require('./custom/views');
