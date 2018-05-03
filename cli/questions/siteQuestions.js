@@ -55,7 +55,7 @@ const title = {
 const host = {
     type: 'input',
     message: 'Enter your site\'s domain.',
-    default: 'http://spee.ch/',
+    default: 'https://www.example.com/',
     name: 'host',
 };
 
@@ -87,17 +87,17 @@ const uploadDirectory = {
     name: 'uploadDirectory',
 };
 
-const thumbnailChannelName = {
+const thumbnailChannel = {
     type: 'input',
     message: 'Enter a channel that will be used to store your thumbnails.',
-    default: '@example-thumbnail-channel',
-    name: 'thumbnailChannelName',
+    default: false,
+    name: 'thumbnailChannel',
 };
 
 const thumbnailChannelId = {
     type: 'input',
     message: 'Enter the claim id for your thumbnail channel.',
-    default: 'no channel id provided',
+    default: false,
     name: 'thumbnailChannelId',
 };
 
@@ -114,6 +114,6 @@ module.exports = [
     twitter,
     primaryClaimAddress,
     uploadDirectory,
-    thumbnailChannelName,
+    thumbnailChannel,
     thumbnailChannelId,
 ];
