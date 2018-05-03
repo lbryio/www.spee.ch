@@ -1,6 +1,6 @@
 const googleId = {
     type: 'input',
-    message: 'Enter a google Id to enable google analytics.',
+    message: 'Enter a Google Analytics ID to enable analytics.',
     default: false,
     name: 'googleId',
 };
