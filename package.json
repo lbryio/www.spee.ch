@@ -4,7 +4,7 @@
   "description": "A web app that uses the spee.ch codebase",
   "main": "index.js",
   "scripts": {
-    "configure": "node cli/index.js",
+    "configure": "node cli/configure.js",
     "build": "webpack --config webpack.prod.js",
     "build-dev": "webpack --config webpack.dev.js",
     "build-dev-client": "webpack --config webpack.dev.client.js",
