@@ -4,15 +4,16 @@
   "description": "A web app that uses the spee.ch codebase",
   "main": "index.js",
   "scripts": {
+    "configure": "node cli/configure.js",
+    "build": "webpack --config webpack.prod.js",
+    "build-dev": "webpack --config webpack.dev.js",
+    "build-dev-client": "webpack --config webpack.dev.client.js",
+    "build-dev-server": "webpack --config webpack.dev.server.js",
+    "pre-build-dev": "webpack --config webpack.dev.prebuild.js",
     "start": "node index.js",
     "start-dev": "builder concurrent build-dev start-dev-server",
     "start-dev-server": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.prod.js",
-    "build-dev": "webpack --config webpack.dev.js",
-    "pre-build-dev": "webpack --config webpack.dev.prebuild.js",
-    "build-dev-client": "webpack --config webpack.dev.client.js",
-    "build-dev-server": "webpack --config webpack.dev.server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
   },
   "homepage": "https://github.com/lbryio/www.spee.ch#readme",
   "dependencies": {
+    "inquirer": "^5.2.0",
     "spee.ch": "git://github.com/lbryio/spee.ch.git",
     "spee.ch-components": "git://github.com/lbryio/spee.ch-components.git",
     "webpack-node-externals": "^1.7.2"
