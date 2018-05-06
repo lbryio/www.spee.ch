@@ -31,10 +31,6 @@
   },
   "homepage": "https://github.com/lbryio/www.spee.ch#readme",
   "dependencies": {
-    "inquirer": "^5.2.0",
-    "spee.ch": "git://github.com/lbryio/spee.ch.git",
-    "spee.ch-components": "git://github.com/lbryio/spee.ch-components.git",
-    "webpack-node-externals": "^1.7.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -44,10 +40,15 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "builder": "^4.0.0",
+    "cross-fetch": "^2.1.1",
     "css-loader": "^0.28.9",
+    "inquirer": "^5.2.0",
     "nodemon": "^1.15.1",
+    "spee.ch": "git://github.com/lbryio/spee.ch.git",
+    "spee.ch-components": "git://github.com/lbryio/spee.ch-components.git",
     "webpack": "^3.10.0",
     "webpack-merge": "^4.1.2",
+    "webpack-node-externals": "^1.7.2",
     "whatwg-fetch": "^2.0.3"
   }
 }
