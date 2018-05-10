@@ -30,12 +30,9 @@ const reduxMiddleware = window.__REDUX_DEVTOOLS_EXTENSION__ ? compose(middleware
 // create the store
 let store;
 if (preloadedState) {
-    console.log('preloaded state found:', preloadedState);
-    // add custom views to preloaded state
-    preloadedState['plugins'] = customViews;
+    preloadedState['plugins'] = customViews; // add custom views to preloaded state
     store = createStore(MyReducers, preloadedState, reduxMiddleware);
 } else {
-    console.log('no preloaded state found');
     store = createStore(MyReducers, reduxMiddleware);
 }
 
