@@ -6,4 +6,4 @@ module.exports = {
     components,
     containers,
     pages,
-}
+};

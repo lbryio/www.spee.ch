@@ -6,10 +6,12 @@ import { BrowserRouter } from 'react-router-dom';
 import createSagaMiddleware from 'redux-saga';
 import { Reducers, Sagas, GAListener, App } from 'spee.ch-components';
 
+import { Logo } from './custom/views/components/Logo'
+
 // configure the reducers by passing initial state configs
 const siteConfig = require('./config/siteConfig.json');
 const customViews = require('./custom/views');
-const MyReducers = Reducers(siteConfig);
+const MyReducers = Reducers(siteConfig, customViews);
 const MyApp = App(customViews);
 const MyGAListener = GAListener(siteConfig);
 
