@@ -11,6 +11,7 @@ import { Logo } from './custom/views/components/Logo'
 // configure the reducers by passing initial state configs
 const siteConfig = require('./config/siteConfig.json');
 const customViews = require('./custom/views');
+console.log('custom views from client.js', customViews);
 const MyReducers = Reducers(siteConfig, customViews);
 const MyApp = App(customViews);
 const MyGAListener = GAListener(siteConfig);
@@ -29,8 +30,12 @@ const reduxMiddleware = window.__REDUX_DEVTOOLS_EXTENSION__ ? compose(middleware
 // create the store
 let store;
 if (preloadedState) {
+    console.log('preloaded state found:', preloadedState);
+    // add custom views to preloaded state
+    preloadedState['plugins'] = customViews;
     store = createStore(MyReducers, preloadedState, reduxMiddleware);
 } else {
+    console.log('no preloaded state found');
     store = createStore(MyReducers, reduxMiddleware);
 }
 
