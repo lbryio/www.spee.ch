@@ -6,14 +6,11 @@ import { BrowserRouter } from 'react-router-dom';
 import createSagaMiddleware from 'redux-saga';
 import { Reducers, Sagas, GAListener, App } from 'spee.ch-components';
 
-import { Logo } from './custom/views/components/Logo'
-
 // configure the reducers by passing initial state configs
 const siteConfig = require('./config/siteConfig.json');
 const customViews = require('./custom/views');
-console.log('custom views from client.js', customViews);
 const MyReducers = Reducers(siteConfig, customViews);
-const MyApp = App(customViews);
+const MyApp = App;
 const MyGAListener = GAListener(siteConfig);
 
 // get the state from a global variable injected into the server-generated HTML
@@ -43,7 +40,7 @@ hydrate(
     <Provider store={store}>
         <BrowserRouter>
             <MyGAListener>
-                <MyApp />
+                <MyApp store={store} />
             </MyGAListener>
         </BrowserRouter>
     </Provider>,

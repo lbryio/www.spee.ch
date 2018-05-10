@@ -8,7 +8,7 @@ class AboutPage extends React.Component {
             <NavBar />
             <div className='row row--padded'>
                 <h3>Welcome to your custom about page!</h3>
-                <p>This is an example of how you can create your own custom pages to replace the default spee.ch pages...</p>
+                <p>This is an example of how you can create your own custom pages to replace the default Spee.ch pages...</p>
             </div>
         </div>
     );
