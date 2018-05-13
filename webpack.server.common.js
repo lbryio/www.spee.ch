@@ -20,7 +20,7 @@ module.exports = {
     __dirname: false,
   },
   externals: [nodeExternals({
-    whitelist: []
+    // whitelist: ['spee.ch','spee.ch-components'],
   })],
   entry    : ['babel-polyfill', 'whatwg-fetch', './server.js'],
   output   : {
@@ -53,10 +53,9 @@ module.exports = {
       __dirname,
     ],
     alias: {
-    // 'components/Logo': returnFullPath('components/Logo'),
-      '@components/Logo': Path.resolve('custom/views/components/Logo'),
-      '@components': Path.resolve('custom/views/components'),
-      'test/TestTest': Path.resolve('custom/views/test/TestTest'),
+      // '@components/Logo': Path.resolve('custom/views/components/Logo'),
+      // '@components': Path.resolve('custom/views/components'),
+      // 'test/TestTest': Path.resolve('custom/views/test/TestTest'),
     },
     extensions: ['.js', '.json', '.jsx', '.css'],
   },

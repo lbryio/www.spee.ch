@@ -43,10 +43,9 @@ module.exports = {
       __dirname,
     ],
     alias: {
-    //   'components': returnFullPath('components'),
-      '@components/Logo': Path.resolve('custom/views/components/Logo'),
-      '@components': Path.resolve('custom/views/components'),
-      'test/TestTest': Path.resolve('custom/views/test/TestTest'),
+      // '@components/Logo': Path.resolve('custom/views/components/Logo'),
+      // '@components': Path.resolve('custom/views/components'),
+      // 'test/TestTest': Path.resolve('custom/views/test/TestTest'),
     },
     extensions: ['.js', '.jsx', '.scss'],
   },
