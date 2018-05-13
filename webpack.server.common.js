@@ -1,13 +1,27 @@
 const Path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const CLIENT_ROOT = Path.resolve(__dirname, 'client/');
+
+const DEFAULT_ROOT = 'node_modules/spee.ch-components/lib/';
+const CUSTOM_ROOT = 'custom/views/';
+const fs = require('fs');
+
+function returnFullPath (shortPath) {
+  // path === e.g. 'components/Logo/'
+  const localPath = Path.join(__dirname, CUSTOM_ROOT, shortPath);
+  if (fs.existsSync(localPath)) {
+    return localPath;
+  }
+  return Path.join(__dirname, DEFAULT_ROOT, shortPath);
+}
 
 module.exports = {
   target: 'node',
   node  : {
     __dirname: false,
   },
-  externals: [nodeExternals()],
+  externals: [nodeExternals({
+    whitelist: []
+  })],
   entry    : ['babel-polyfill', 'whatwg-fetch', './server.js'],
   output   : {
     path         : Path.join(__dirname, '/'),
@@ -34,10 +48,16 @@ module.exports = {
   },
   resolve: {
     modules: [
-      CLIENT_ROOT,
+      // Path.join(__dirname, 'custom/views/'),
       'node_modules',
       __dirname,
     ],
+    alias: {
+    // 'components/Logo': returnFullPath('components/Logo'),
+      '@components/Logo': Path.resolve('custom/views/components/Logo'),
+      '@components': Path.resolve('custom/views/components'),
+      'test/TestTest': Path.resolve('custom/views/test/TestTest'),
+    },
     extensions: ['.js', '.json', '.jsx', '.css'],
   },
 };

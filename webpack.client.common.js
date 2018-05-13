@@ -1,7 +1,19 @@
 const Path = require('path');
-const CLIENT_ROOT = Path.resolve(__dirname, 'client/');  // needed?
-const SPEECH_ROOT = Path.resolve(__dirname, 'speech/');  // needed?
-const CONFIG_ROOT = Path.resolve(__dirname, 'config/');  // needed?
+const DEFAULT_ROOT = 'node_modules/spee.ch-components/lib/';
+const CUSTOM_ROOT = 'custom/views/';
+const fs = require('fs');
+
+function returnFullPath (shortPath) {
+  // path === e.g. 'components/Logo/'
+  const localPath = Path.join(__dirname, CUSTOM_ROOT, shortPath);
+  if (fs.existsSync(localPath)) {
+    console.log('using local path', localPath);
+    return localPath;
+  }
+  const defaultPath = Path.join(__dirname, DEFAULT_ROOT, shortPath);
+  console.log('using default path:', defaultPath);
+  return defaultPath
+}
 
 module.exports = {
   target: 'web',
@@ -25,12 +37,17 @@ module.exports = {
   },
   resolve: {
     modules: [
-      CLIENT_ROOT,
-      SPEECH_ROOT,
-      CONFIG_ROOT,
+      // Path.join(__dirname, 'custom/views'),
+      // Path.join(__dirname, 'custom/views/components'),
       'node_modules',
       __dirname,
     ],
+    alias: {
+    //   'components': returnFullPath('components'),
+      '@components/Logo': Path.resolve('custom/views/components/Logo'),
+      '@components': Path.resolve('custom/views/components'),
+      'test/TestTest': Path.resolve('custom/views/test/TestTest'),
+    },
     extensions: ['.js', '.jsx', '.scss'],
   },
 };
