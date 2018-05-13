@@ -37,8 +37,6 @@ module.exports = {
   },
   resolve: {
     modules: [
-      // Path.join(__dirname, 'custom/views'),
-      // Path.join(__dirname, 'custom/views/components'),
       'node_modules',
       __dirname,
     ],
