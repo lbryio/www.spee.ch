@@ -1,4 +1,5 @@
 const findAndLoadConfig = require('./utils/findAndLoadConfig.js');
+require('babel-polyfill');
 
 // require the spee.ch package
 const Server = require('spee.ch');
