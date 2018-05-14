@@ -1,10 +1,7 @@
 // add aliasing
+const createModuleAliases = require('./utils/createModuleAliases.js');
 const moduleAlias = require('module-alias');
-moduleAlias.addAliases({
-  '@pages': __dirname + '/lib/views/pages',
-  // '@containers': __dirname + '/lib/views/containers',
-  '@containers': __dirname + '/node_modules/spee.ch-components/lib/containers'
-});
+moduleAlias.addAliases(createModuleAliases());
 
 require('babel-polyfill');
 
