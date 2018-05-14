@@ -1,4 +1,14 @@
-require('module-alias/register')
+// add aliasing
+const moduleAlias = require('module-alias');
+moduleAlias.addAliases({
+  '@pages': __dirname + '/lib/views/pages',
+  // '@containers': __dirname + '/lib/views/containers',
+  '@containers': __dirname + '/node_modules/spee.ch-components/lib/containers'
+});
+
+require('babel-polyfill');
+
+// require utils
 const findAndLoadConfig = require('./utils/findAndLoadConfig.js');
 // require the spee.ch package
 const Server = require('spee.ch');

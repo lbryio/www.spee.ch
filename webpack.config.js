@@ -17,23 +17,23 @@ function returnFullPath (shortPath) {
 
 module.exports = {
   target: 'web',
-  entry : ['babel-polyfill', 'whatwg-fetch', './client.js'],
+  entry : ['babel-polyfill', 'whatwg-fetch', './lib/client.js'],
   output: {
     path      : Path.join(__dirname, 'public/bundle/'),
     publicPath: 'public/bundle/',
     filename  : 'bundle.js',
   },
   module: {
-    loaders: [
-      {
-        test   : /.jsx?$/,
-        loader : 'babel-loader',
-        exclude: /node_modules/,
-        query  : {
-          presets: ['es2015', 'react', 'stage-2'],
-        },
-      },
-    ],
+    // loaders: [
+    //   {
+    //     test   : /.jsx?$/,
+    //     loader : 'babel-loader',
+    //     exclude: /node_modules/,
+    //     query  : {
+    //       presets: ['es2015', 'react', 'stage-2'],
+    //     },
+    //   },
+    // ],
   },
   resolve: {
     modules: [
@@ -41,10 +41,9 @@ module.exports = {
       __dirname,
     ],
     alias: {
-      '@pages/AboutPage': Path.resolve('custom/views/pages/AboutPage'),
-      // '@components/Logo': Path.resolve('custom/views/components/Logo'),
-      // '@components': Path.resolve('custom/views/components'),
-      // 'test/TestTest': Path.resolve('custom/views/test/TestTest'),
+      '@pages': Path.resolve('lib/views/pages'),
+      '@containers': Path.resolve('node_modules/spee.ch-components/lib/containers'),
+      '@components': Path.resolve('node_modules/spee.ch-components/lib/components'),
     },
     extensions: ['.js', '.jsx', '.scss'],
   },
