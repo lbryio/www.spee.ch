@@ -6,12 +6,14 @@
   "scripts": {
     "transpile": "babel src -d lib",
     "transpile:dev": "babel src -w -d lib",
-    "build": "webpack --config webpack.config.js",
-    "build:dev": "webpack --config webpack.config.js --watch",
+    "webpack": "webpack --config webpack.config.js",
+    "webpack:dev": "webpack --config webpack.config.js --watch",
+    "build": "builder concurrent transpile webpack",
+    "build:dev": "builder concurrent transpile:dev webpack:dev",
     "configure": "node cli/configure.js",
     "server:dev": "nodemon server.js",
     "start": "node server.js",
-    "start:dev": "builder concurrent transpile:dev build:dev server:dev",
+    "start:dev": "builder concurrent transpile:dev webpack:dev server:dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
