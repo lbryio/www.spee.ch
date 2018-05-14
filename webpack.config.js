@@ -1,6 +1,7 @@
 const Path = require('path');
 const fs = require('fs');
 const createModuleAliases = require('./utils/createModuleAliases.js');
+
 const customAliases = createModuleAliases();
 console.log(customAliases);
 

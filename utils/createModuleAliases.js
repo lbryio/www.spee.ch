@@ -1,11 +1,16 @@
-const { statSync, readdirSync } = require('fs');
+const { statSync, existsSync, readdirSync } = require('fs');
 const { join, resolve } = require('path');
 
-const getDirectories = p => readdirSync(p).filter(f => statSync(join(p, f)).isDirectory());
+const getFolders = path => {
+  if (existsSync(path)) {
+    return readdirSync(path).filter(file => statSync(join(path, file)).isDirectory());
+  }
+  return [];
+};
 
 const addAlliasesForFolder = (name, aliasObject) => { // components
   const folderPath = resolve(`lib/views/${name}`);
-  const components = getDirectories(folderPath);
+  const components = getFolders(folderPath);
   for (let i = 0; i < components.length; i++) {
     let folderName = components[i];
     let aliasName = `@${name}/${folderName}`;
