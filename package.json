@@ -4,14 +4,14 @@
   "description": "A web app that uses the spee.ch codebase",
   "main": "server.js",
   "scripts": {
-    "babel": "babel src -d lib",
-    "babel:watch": "babel src -w -d lib",
+    "transpile": "babel src -d lib",
+    "transpile:dev": "babel src -w -d lib",
     "build": "webpack --config webpack.config.js",
     "build:dev": "webpack --config webpack.config.js --watch",
     "configure": "node cli/configure.js",
+    "server:dev": "nodemon server.js",
     "start": "node server.js",
-    "start:dev": "builder concurrent babel:watch build:dev start:dev-server",
-    "start:dev-server": "nodemon server.js",
+    "start:dev": "builder concurrent transpile:dev build:dev server:dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
