@@ -17,16 +17,16 @@ const addAlliasesForFolder = (name, aliasObject) => { // components
 
 module.exports = () => {
   // default aliases
-  let moduleAliases = {
-    '@pages': resolve('node_modules/spee.ch-components/lib/pages'),
-    '@containers': resolve('node_modules/spee.ch-components/lib/containers'),
-    '@components': resolve('node_modules/spee.ch-components/lib/components'),
-  };
+  let moduleAliases = {};
 
   // create specific aliases for locally defined components
   moduleAliases = addAlliasesForFolder('containers', moduleAliases);
   moduleAliases = addAlliasesForFolder('components', moduleAliases);
   moduleAliases = addAlliasesForFolder('pages', moduleAliases);
+
+  moduleAliases['@pages'] = resolve('node_modules/spee.ch-components/lib/pages');
+  moduleAliases['@containers'] = resolve('node_modules/spee.ch-components/lib/containers');
+  moduleAliases['@components'] = resolve('node_modules/spee.ch-components/lib/components');
 
   // return finished aliases
   return moduleAliases;

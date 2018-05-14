@@ -1,6 +1,8 @@
 const Path = require('path');
 const fs = require('fs');
 const createModuleAliases = require('./utils/createModuleAliases.js');
+const customAliases = createModuleAliases();
+console.log(customAliases);
 
 module.exports = {
   target: 'web',
@@ -16,7 +18,7 @@ module.exports = {
       'node_modules',
       __dirname,
     ],
-    alias: createModuleAliases(),
+    alias: customAliases,
     extensions: ['.js', '.jsx', '.scss'],
   },
 };
