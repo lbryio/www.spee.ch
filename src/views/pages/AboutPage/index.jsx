@@ -1,11 +1,11 @@
 import React from 'react';
-import { NavBar } from 'spee.ch-components';
+import NavBar from '@containers/NavBar/index.js';
 
 class AboutPage extends React.Component {
   render () {
     return (
         <div>
-            <NavBar />
+          <NavBar/>
             <div className='row row--padded'>
                 <h3>Welcome to your custom about page!</h3>
                 <p>This is an example of how you can create your own custom pages to replace the default spee.ch pages...</p>

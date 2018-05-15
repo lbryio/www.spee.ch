@@ -1,10 +1,17 @@
-const findAndLoadConfig = require('./utils/findAndLoadConfig.js');
+// add aliasing
+const createModuleAliases = require('./utils/createModuleAliases.js');
+const moduleAlias = require('module-alias');
+moduleAlias.addAliases(createModuleAliases());
 
+require('babel-polyfill');
+
+// require utils
+const findAndLoadConfig = require('./utils/findAndLoadConfig.js');
 // require the spee.ch package
 const Server = require('spee.ch');
 
 // get custom pages
-const customViews = require('./custom/views');
+// const customViews = require('./custom/views');
 
 try {
     // create a new spee.ch server
@@ -19,7 +26,7 @@ try {
     server.configureMysql(mysqlConfig);
     server.configureSite(siteConfig);
     server.configureSlack(slackConfig);
-    server.configureViews(customViews);
+    // server.configureViews(customViews);
     // create the express app and configure it
     server.initialize();
     // sync the db and start express app listening on the configured port
