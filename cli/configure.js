@@ -29,7 +29,7 @@ inquirer
   })
   .then(() => {
     // check for lbrynet connection & retrieve a default address
-    console.log('\nRetrieving primary claim address...');
+    console.log('\nRetrieving your primary claim address from LBRY...');
     return axios
       .post('http://localhost:5279', {
         method: 'wallet_list',
@@ -47,7 +47,7 @@ inquirer
   })
   .then(() => {
     // create thumbnail address
-    console.log('\nCreating thumbnail channel...');
+    console.log('\nCreating a LBRY channel to publish your thumbnails to (this may take a minute)...');
     return axios
       .post('http://localhost:5279', {
         method: 'channel_new',
