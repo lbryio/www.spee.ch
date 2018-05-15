@@ -56,6 +56,6 @@
     "webpack": "^3.10.0",
     "webpack-merge": "^4.1.2",
     "webpack-node-externals": "^1.7.2",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.4"
   }
 }

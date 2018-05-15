@@ -55,7 +55,7 @@ const title = {
 const host = {
     type: 'input',
     message: 'Enter your site\'s domain.',
-    default: 'https://www.example.com/',
+    default: 'https://www.example.com',
     name: 'host',
 };
 
@@ -73,13 +73,6 @@ const twitter = {
     name: 'twitter',
 };
 
-const primaryClaimAddress = {
-    type: 'input',
-    message: 'Choose an address from your lbry wallet to publish from.',
-    default: '',
-    name: 'primaryClaimAddress',
-};
-
 const uploadDirectory = {
     type: 'input',
     message: 'Enter a directory where uploads should be stored.',
@@ -87,33 +80,16 @@ const uploadDirectory = {
     name: 'uploadDirectory',
 };
 
-const thumbnailChannel = {
-    type: 'input',
-    message: 'Enter a channel that will be used to store your thumbnails.',
-    default: false,
-    name: 'thumbnailChannel',
-};
-
-const thumbnailChannelId = {
-    type: 'input',
-    message: 'Enter the claim id for your thumbnail channel.',
-    default: false,
-    name: 'thumbnailChannelId',
-};
-
 module.exports = [
-    googleId,
-    defaultAssetTitle,
-    defaultAssetDescription,
-    defaultAssetThumbnail,
-    sessionKey,
-    port,
-    title,
-    host,
-    description,
-    twitter,
-    primaryClaimAddress,
-    uploadDirectory,
-    thumbnailChannel,
-    thumbnailChannelId,
+  googleId,
+  defaultAssetTitle,
+  defaultAssetDescription,
+  defaultAssetThumbnail,
+  sessionKey,
+  port,
+  title,
+  host,
+  description,
+  twitter,
+  uploadDirectory,
 ];
