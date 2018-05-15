@@ -13,15 +13,10 @@ const username = {
 };
 
 const password = {
-    type: 'password',
+    type: 'input',
     message: 'What is the PASSWORD for your MySQL database?',
+    default: '',
     name: 'password',
-    validate: (input) => {
-        if (input.length >= 1) {
-            return true;
-        }
-        return "You must enter a password";
-    },
 };
 
 module.exports = [database, username, password];
