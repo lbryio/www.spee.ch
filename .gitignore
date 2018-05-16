@@ -1,9 +1,5 @@
 .idea/
 node_modules/
-config/loggerConfig.json
-config/mysqlConfig.json
-config/siteConfig.json
-config/slackConfig.json
 ./index.js
 ./index.js.map
 public/bundle/bundle.js

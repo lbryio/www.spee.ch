@@ -3,29 +3,29 @@ const fs = require('fs');
 const Path = require('path');
 const axios = require('axios');
 
-const loggerQuestions = require(Path.resolve(__dirname, 'questions/loggerQuestions.js'));
 const mysqlQuestions = require(Path.resolve(__dirname, 'questions/mysqlQuestions.js'));
 const siteQuestions = require(Path.resolve(__dirname, 'questions/siteQuestions.js'));
-const slackQuestions = require(Path.resolve(__dirname, 'questions/slackQuestions.js'));
 
 let primaryClaimAddress = '';
 let thumbnailChannel = '@thumbnails';
 let thumbnailChannelId = '';
 
+let mysqlConfig = require('../config/mysqlConfig.json');
+const { database: mysqlDatabase, username: mysqlUsername, password: mysqlPassword } = mysqlConfig;
+console.log('starting mysql config:', mysqlConfig);
+
+let siteConfig = require('../config/siteConfig.json');
+const { details : { port, title, host}, publishing: { uploadDirectory }} = siteConfig;
+console.log('starting site config:', siteConfig);
+
 inquirer
-  .prompt(loggerQuestions)
+  .prompt(mysqlQuestions(mysqlDatabase, mysqlUsername, mysqlPassword))
   .then(results => {
-      const fileLocation = Path.resolve(__dirname, '../config/loggerConfig.json');
-      const fileContents = JSON.stringify(results, null, 2);
-      fs.writeFileSync(fileLocation, fileContents, 'utf-8');
-  })
-  .then(() => {
-      return inquirer.prompt(mysqlQuestions);
-  })
-  .then(results => {
+      console.log('\nCreating mysql config file...');
       const fileLocation = Path.resolve(__dirname, '../config/mysqlConfig.json');
       const fileContents = JSON.stringify(results, null, 2);
       fs.writeFileSync(fileLocation, fileContents, 'utf-8');
+      console.log('Successfully created /config/mysqlConfig.json!\n');
   })
   .then(() => {
     // check for lbrynet connection & retrieve a default address
@@ -36,18 +36,29 @@ inquirer
       })
       .then(response => {
         if (response.data) {
+
+          if (response.data.error){
+            throw new Error(response.data.error.message);
+          }
+
           primaryClaimAddress = response.data.result[0];
-          console.log('Primary claim address:', primaryClaimAddress);
+          console.log('Primary claim address:', primaryClaimAddress, '!\n');
           return;
         }
         throw new Error('No data received from lbrynet');
       }).catch(error => {
-        throw new Error(`Error received from lbrynet.  Please start lbry and try again. Error: ${error}`);
+        throw error;
       })
   })
   .then(() => {
+    console.log('\nCreating a LBRY channel to publish your thumbnails to...');
+    // exit if a channel already exists
+    const { publishing } = siteConfig;
+    if (publishing.thumbnailChannel) {
+      console.log(`Found existing channel ${publishing.thumbnailChannel}#${publishing.thumbnailChannelId}\n`);
+      return;
+    }
     // create thumbnail address
-    console.log('\nCreating a LBRY channel to publish your thumbnails to (this may take a minute)...');
     return axios
       .post('http://localhost:5279', {
         method: 'channel_new',
@@ -58,63 +69,39 @@ inquirer
       })
       .then(response => {
         if (response.data) {
+
+          if (response.data.error){
+            throw new Error(response.data.error.message);
+          }
+
           thumbnailChannelId = response.data.result.claim_id;
+          siteConfig['publishing']['thumbnailChannel'] = thumbnailChannel;
+          siteConfig['publishing']['thumbnailChannelId'] = thumbnailChannelId;
           console.log(`Created channel: ${thumbnailChannel}#${thumbnailChannelId}\n`);
           return;
         }
         throw new Error('No data received from lbrynet');
       }).catch(error => {
-        throw new Error(`Error received from lbrynet.  Please start lbry and try again. Error: ${error}`);
+        throw error
       })
   })
   .then(() => {
-      return inquirer.prompt(siteQuestions);
+      return inquirer.prompt(siteQuestions(port, title, host, uploadDirectory));
   })
   .then(results => {
-      let siteResponses;
-      siteResponses = {
-          analytics: {
-              googleId: results.googleId,
-          },
-          assetDefaults: {
-              title      : results.defaultAssetTitle,
-              description: results.defaultAssetDescription,
-              thumbnail  : results.defaultAssetThumbnail,
-          },
-          auth: {
-              sessionKey: results.sessionKey,
-          },
-          details: {
-              port       : results.port,
-              title      : results.title,
-              host       : results.host,
-              description: results.description,
-              twitter    : results.twitter,
-          },
-          publishing: {
-              primaryClaimAddress,
-              uploadDirectory         : results.uploadDirectory,
-              thumbnailChannel,
-              thumbnailChannelId,
-              additionalClaimAddresses: [],
-              disabled                : false,
-              disabledMessage         : 'Please check back soon',
-          },
-      };
-      const fileLocation = Path.resolve(__dirname, '../config/siteConfig.json');
-      const fileContents = JSON.stringify(siteResponses, null, 2);
-      fs.writeFileSync(fileLocation, fileContents, 'utf-8');
+    console.log('\nCreating site config file...');
+    siteConfig['details']['port'] = results.port;
+    siteConfig['details']['title'] = results.title;
+    siteConfig['details']['host'] = results.host;
+    siteConfig['publishing']['uploadDirectory'] = results.uploadDirectory;
+    const fileLocation = Path.resolve(__dirname, '../config/siteConfig.json');
+    const fileContents = JSON.stringify(siteConfig, null, 2);
+    fs.writeFileSync(fileLocation, fileContents, 'utf-8');
+    console.log('Successfully created /config/siteConfig.json\n');
   })
   .then(() => {
-      return inquirer.prompt(slackQuestions);
-  })
-  .then(results => {
-      const fileLocation = Path.resolve(__dirname, '../config/slackConfig.json');
-      const fileContents = JSON.stringify(results, null, 2);
-      fs.writeFileSync(fileLocation, fileContents, 'utf-8');
-  })
-  .then(() => {
-      console.log('All done!');
+      console.log('\nYou\'re all done!');
+      console.log('If you want to change any settings, you can edit the files in the /config folder\n');
       process.exit(0);
   })
   .catch(error => {
