@@ -19,7 +19,7 @@
   },
   "publishing": {
     "primaryClaimAddress": null,
-    "uploadDirectory": "home/stuff/suff",
+    "uploadDirectory": "/home/lbry/Uploads",
     "thumbnailChannel": "@thumbnails",
     "thumbnailChannelId": "7ce4c451f05529949ff9b56de10e7f467d373f1b",
     "additionalClaimAddresses": [],

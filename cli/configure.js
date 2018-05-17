@@ -149,8 +149,9 @@ inquirer
     console.log('Successfully created /config/siteConfig.json\n');
   })
   .then(() => {
-      console.log('\nYou\'re all done!  Next step: run "npm run start:dev" to start your server!');
-      console.log('If you want to change any settings, you can edit the files in the "/config" folder.\n');
+      console.log('\nYou\'re all done!');
+    console.log('Next step: run "npm run start:dev" to start your server!');
+      console.log('If you want to change any settings, you can edit the files in the "/config" folder.');
       process.exit(0);
   })
   .catch(error => {

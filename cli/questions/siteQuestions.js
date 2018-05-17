@@ -1,3 +1,5 @@
+const makeDir = require('make-dir');
+
 const port = (defaultAnswer) => {
   return {
     type: 'input',
@@ -35,11 +37,15 @@ const uploadDirectory = (defaultAnswer) => {
    validate (input) {
      // make sure the directory exists
      return new Promise((resolve, reject) => {
-       setTimeout(function() {
-         console.log('input received:', input);
-         resolve(true);
-       }, 3000);
-     })
+       console.log('\n\nCreating directory', input, '...');
+       try {
+         const dirPath = makeDir.sync(input);
+         console.log('Successfully created directory at', dirPath, '\n');
+       } catch (error) {
+         console.log('Failed to create directory, please create directory manually.\n')
+       }
+       resolve(true);
+     });
    }
  };
 };
