@@ -20,8 +20,8 @@
   "publishing": {
     "primaryClaimAddress": null,
     "uploadDirectory": "ffff",
-    "thumbnailChannel": null,
-    "thumbnailChannelId": null,
+    "thumbnailChannel": "@thumbnails",
+    "thumbnailChannelId": "a9bee7aa09811d2f7efb99243aeab3713b73b4dc",
     "additionalClaimAddresses": [],
     "disabled": false,
     "disabledMessage": "Default publishing disabled message"

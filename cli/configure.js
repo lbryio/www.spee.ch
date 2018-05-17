@@ -7,16 +7,15 @@ const mysqlQuestions = require(Path.resolve(__dirname, 'questions/mysqlQuestions
 const siteQuestions = require(Path.resolve(__dirname, 'questions/siteQuestions.js'));
 
 let primaryClaimAddress = '';
-let thumbnailChannel = '@thumbnails';
+let thumbnailChannelDefault = '@thumbnails';
+let thumbnailChannel = '';
 let thumbnailChannelId = '';
 
 let mysqlConfig = require('../config/mysqlConfig.json');
 const { database: mysqlDatabase, username: mysqlUsername, password: mysqlPassword } = mysqlConfig;
-console.log('starting mysql config:', mysqlConfig);
 
 let siteConfig = require('../config/siteConfig.json');
 const { details : { port, title, host}, publishing: { uploadDirectory }} = siteConfig;
-console.log('starting site config:', siteConfig);
 
 inquirer
   .prompt(mysqlQuestions(mysqlDatabase, mysqlUsername, mysqlPassword))
@@ -51,19 +50,67 @@ inquirer
       })
   })
   .then(() => {
-    console.log('\nCreating a LBRY channel to publish your thumbnails to...');
-    // exit if a channel already exists
+    console.log('\nChecking to see if a LBRY channel exists for thumbnails...');
+    // see if a channel name already exists in the configs
     const { publishing } = siteConfig;
-    if (publishing.thumbnailChannel) {
-      console.log(`Found existing channel ${publishing.thumbnailChannel}#${publishing.thumbnailChannelId}\n`);
+    const foundConfigThumbChannelUri = `${publishing.thumbnailChannel}#${publishing.thumbnailChannelId}`;
+    console.log(`Thumbnail channel in configs: ${foundConfigThumbChannelUri}.`);
+    thumbnailChannel = publishing.thumbnailChannel;
+    thumbnailChannelId = publishing.thumbnailChannelId;
+    // see if channel exists in the wallet
+    return axios
+      .post('http://localhost:5279', {
+        method: 'channel_list',
+      })
+      .then(response => {
+        if (response.data) {
+
+          if (response.data.error){
+            throw new Error(response.data.error.message);
+          }
+
+          const channelList = response.data.result || [];
+          console.log('channels in this wallet:', channelList.length);
+          for (let i = 0; i < channelList.length; i++) {
+            if (channelList[i].name === thumbnailChannelDefault) {
+              const foundChannel = channelList[i];
+              console.log(`Found a thumbnail channel in wallet.`);
+              if (foundChannel.is_mine === false) {
+                console.log('Channel was not mine');
+                continue;
+              }
+              if (foundChannel.name === thumbnailChannel && foundChannel.claim_id === thumbnailChannelId) {
+                console.log('No update to existing thumbnail config required\n');
+              } else {
+                console.log(`Replacing thumbnail channel in config...`);
+                siteConfig['publishing']['thumbnailChannel'] = foundChannel.name;
+                siteConfig['publishing']['thumbnailChannelId'] = foundChannel.claim_id;
+                console.log(`Successfully replaced channel in config.\n`);
+              }
+              return true;
+            }
+          }
+          console.log(`Did not find a thumbnail channel that is mine in wallet.\n`);
+          return false;
+        }
+        throw new Error('No data received from lbrynet');
+      }).catch(error => {
+        throw error
+      })
+
+  })
+  .then((thumbnailChannelAlreadyExists) => {
+    // exit if a channel already exists, skip this step
+    if (thumbnailChannelAlreadyExists) {
       return;
     }
     // create thumbnail address
+    console.log('\nCreating a LBRY channel to publish your thumbnails to...');
     return axios
       .post('http://localhost:5279', {
         method: 'channel_new',
         params: {
-          channel_name : thumbnailChannel,
+          channel_name : thumbnailChannelDefault,
           amount       : 0.1,
         },
       })
@@ -74,6 +121,7 @@ inquirer
             throw new Error(response.data.error.message);
           }
 
+          thumbnailChannel = thumbnailChannelDefault;
           thumbnailChannelId = response.data.result.claim_id;
           siteConfig['publishing']['thumbnailChannel'] = thumbnailChannel;
           siteConfig['publishing']['thumbnailChannelId'] = thumbnailChannelId;
@@ -105,6 +153,11 @@ inquirer
       process.exit(0);
   })
   .catch(error => {
+    if (error.code === 'ECONNREFUSED') {
+      console.log('Error: could not connect to LBRY.  Please make sure lbrynet daemon is running.');
+      process.exit(1);
+    } else {
       console.log(error);
       process.exit(1);
+    }
   });
