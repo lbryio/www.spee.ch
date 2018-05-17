@@ -20,8 +20,8 @@
   "publishing": {
     "primaryClaimAddress": null,
     "uploadDirectory": "/home/lbry/Uploads",
-    "thumbnailChannel": "@thumbnails",
-    "thumbnailChannelId": "7ce4c451f05529949ff9b56de10e7f467d373f1b",
+    "thumbnailChannel": null,
+    "thumbnailChannelId": null,
     "additionalClaimAddresses": [],
     "disabled": false,
     "disabledMessage": "Default publishing disabled message"
