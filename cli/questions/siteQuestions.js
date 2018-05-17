@@ -1,95 +1,60 @@
-const googleId = {
-    type: 'input',
-    message: 'Enter a Google Analytics ID to enable analytics.',
-    default: false,
-    name: 'googleId',
-};
+const makeDir = require('make-dir');
 
-const defaultAssetTitle = {
-    type: 'input',
-    message: 'Enter a default title for content shared from your site.',
-    default: 'Default Content Title',
-    name: 'defaultAssetTitle',
-};
-
-const defaultAssetDescription = {
-    type: 'input',
-    message: 'Enter a default title for content shared from your site.',
-    default: 'Default Content Description',
-    name: 'defaultAssetDescription',
-};
-
-const defaultAssetThumbnail = {
-    type: 'input',
-    message: 'Enter a url for a default thumbnail for videos shared from your site.',
-    default: 'https://spee.ch/0e5d4e8f4086e13f5b9ca3f9648f518e5f524402/speechflag.png',
-    name: 'defaultAssetThumbnail',
-};
-
-const sessionKey = {
-    type: 'input',
-    message: 'Enter a secret key which will be used to secure user authentication.',
-    name: 'sessionKey',
-    validate: (input) => {
-        if (input.length >= 1) {
-            return true;
-        }
-        return "You must enter a sessionKey";
-    },
-};
-
-const port = {
+const port = (defaultAnswer) => {
+  return {
     type: 'input',
     message: 'Enter a PORT for your server to run on.',
-    default: 3000,
+    default: defaultAnswer,
     name: 'port',
+  }
 };
 
-const title = {
+const title = (defaultAnswer) => {
+  return {
     type: 'input',
     message: 'Enter a title for your site.',
-    default: 'My Site',
+    default: defaultAnswer,
     name: 'title',
+  };
 };
 
-const host = {
+
+const host = (defaultAnswer) => {
+  return {
     type: 'input',
     message: 'Enter your site\'s domain.',
-    default: 'https://www.example.com',
+    default: defaultAnswer,
     name: 'host',
+  };
 };
 
-const description = {
-    type: 'input',
-    message: 'Enter a short description for your site.',
-    default: 'A decentralized hosting platform built on LBRY',
-    name: 'description',
+const uploadDirectory = (defaultAnswer) => {
+ return {
+   type: 'input',
+   message: 'Enter a directory where uploads should be stored.',
+   default: defaultAnswer,
+   name: 'uploadDirectory',
+   validate (input) {
+     // make sure the directory exists
+     return new Promise((resolve, reject) => {
+       console.log('\n\nCreating directory', input, '...');
+       try {
+         const dirPath = makeDir.sync(input);
+         console.log('Successfully created directory at', dirPath, '\n');
+       } catch (error) {
+         console.log('Failed to create directory, please create directory manually.\n')
+       }
+       resolve(true);
+     });
+   }
+ };
 };
 
-const twitter = {
-    type: 'input',
-    message: 'Enter your site\'s twitter handle.',
-    default: false,
-    name: 'twitter',
+module.exports = (defaultPort, defaultTitle, defaultHost, defaultUploadDirectory) => {
+  return [
+    port(defaultPort),
+    title(defaultTitle),
+    host(defaultHost),
+    uploadDirectory(defaultUploadDirectory),
+  ]
 };
-
-const uploadDirectory = {
-    type: 'input',
-    message: 'Enter a directory where uploads should be stored.',
-    default: '/home/lbry/Uploads',
-    name: 'uploadDirectory',
-};
-
-module.exports = [
-  googleId,
-  defaultAssetTitle,
-  defaultAssetDescription,
-  defaultAssetThumbnail,
-  sessionKey,
-  port,
-  title,
-  host,
-  description,
-  twitter,
-  uploadDirectory,
-];

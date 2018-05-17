@@ -3,29 +3,28 @@ const fs = require('fs');
 const Path = require('path');
 const axios = require('axios');
 
-const loggerQuestions = require(Path.resolve(__dirname, 'questions/loggerQuestions.js'));
 const mysqlQuestions = require(Path.resolve(__dirname, 'questions/mysqlQuestions.js'));
 const siteQuestions = require(Path.resolve(__dirname, 'questions/siteQuestions.js'));
-const slackQuestions = require(Path.resolve(__dirname, 'questions/slackQuestions.js'));
 
 let primaryClaimAddress = '';
-let thumbnailChannel = '@thumbnails';
+let thumbnailChannelDefault = '@thumbnails';
+let thumbnailChannel = '';
 let thumbnailChannelId = '';
 
+let mysqlConfig = require('../config/mysqlConfig.json');
+const { database: mysqlDatabase, username: mysqlUsername, password: mysqlPassword } = mysqlConfig;
+
+let siteConfig = require('../config/siteConfig.json');
+const { details : { port, title, host}, publishing: { uploadDirectory }} = siteConfig;
+
 inquirer
-  .prompt(loggerQuestions)
+  .prompt(mysqlQuestions(mysqlDatabase, mysqlUsername, mysqlPassword))
   .then(results => {
-      const fileLocation = Path.resolve(__dirname, '../config/loggerConfig.json');
-      const fileContents = JSON.stringify(results, null, 2);
-      fs.writeFileSync(fileLocation, fileContents, 'utf-8');
-  })
-  .then(() => {
-      return inquirer.prompt(mysqlQuestions);
-  })
-  .then(results => {
+      console.log('\nCreating mysql config file...');
       const fileLocation = Path.resolve(__dirname, '../config/mysqlConfig.json');
       const fileContents = JSON.stringify(results, null, 2);
       fs.writeFileSync(fileLocation, fileContents, 'utf-8');
+      console.log('Successfully created /config/mysqlConfig.json!\n');
   })
   .then(() => {
     // check for lbrynet connection & retrieve a default address
@@ -36,88 +35,131 @@ inquirer
       })
       .then(response => {
         if (response.data) {
+
+          if (response.data.error){
+            throw new Error(response.data.error.message);
+          }
+
           primaryClaimAddress = response.data.result[0];
-          console.log('Primary claim address:', primaryClaimAddress);
+          console.log('Primary claim address:', primaryClaimAddress, '!\n');
           return;
         }
         throw new Error('No data received from lbrynet');
       }).catch(error => {
-        throw new Error(`Error received from lbrynet.  Please start lbry and try again. Error: ${error}`);
+        throw error;
       })
   })
   .then(() => {
+    console.log('\nChecking to see if a LBRY channel exists for thumbnails...');
+    // see if a channel name already exists in the configs
+    const { publishing } = siteConfig;
+    thumbnailChannel = publishing.thumbnailChannel;
+    thumbnailChannelId = publishing.thumbnailChannelId;
+    console.log(`Thumbnail channel in configs: ${thumbnailChannel}#${thumbnailChannelId}.`);
+    // see if channel exists in the wallet
+    return axios
+      .post('http://localhost:5279', {
+        method: 'channel_list',
+      })
+      .then(response => {
+        if (response.data) {
+
+          if (response.data.error){
+            throw new Error(response.data.error.message);
+          }
+
+          const channelList = response.data.result || [];
+          console.log('channels in this wallet:', channelList.length);
+          for (let i = 0; i < channelList.length; i++) {
+            if (channelList[i].name === thumbnailChannelDefault) {
+              const foundChannel = channelList[i];
+              console.log(`Found a thumbnail channel in wallet.`);
+              if (foundChannel.is_mine === false) {
+                console.log('Channel was not mine');
+                continue;
+              }
+              console.log('name:', foundChannel.name);
+              console.log('claim_id:', foundChannel.claim_id);
+              if (foundChannel.name === thumbnailChannel && foundChannel.claim_id === thumbnailChannelId) {
+                console.log('No update to existing thumbnail config required\n');
+              } else {
+                console.log(`Replacing thumbnail channel in config...`);
+                siteConfig['publishing']['thumbnailChannel'] = foundChannel.name;
+                siteConfig['publishing']['thumbnailChannelId'] = foundChannel.claim_id;
+                console.log(`Successfully replaced channel in config.\n`);
+              }
+              return true;
+            }
+          }
+          console.log(`Did not find a thumbnail channel that is mine in wallet.\n`);
+          return false;
+        }
+        throw new Error('No data received from lbrynet');
+      }).catch(error => {
+        throw error
+      })
+
+  })
+  .then((thumbnailChannelAlreadyExists) => {
+    // exit if a channel already exists, skip this step
+    if (thumbnailChannelAlreadyExists) {
+      return;
+    }
     // create thumbnail address
-    console.log('\nCreating a LBRY channel to publish your thumbnails to (this may take a minute)...');
+    console.log('\nCreating a LBRY channel to publish your thumbnails to...');
     return axios
       .post('http://localhost:5279', {
         method: 'channel_new',
         params: {
-          channel_name : thumbnailChannel,
+          channel_name : thumbnailChannelDefault,
           amount       : 0.1,
         },
       })
       .then(response => {
         if (response.data) {
+
+          if (response.data.error){
+            throw new Error(response.data.error.message);
+          }
+
+          thumbnailChannel = thumbnailChannelDefault;
           thumbnailChannelId = response.data.result.claim_id;
+          siteConfig['publishing']['thumbnailChannel'] = thumbnailChannel;
+          siteConfig['publishing']['thumbnailChannelId'] = thumbnailChannelId;
           console.log(`Created channel: ${thumbnailChannel}#${thumbnailChannelId}\n`);
           return;
         }
         throw new Error('No data received from lbrynet');
       }).catch(error => {
-        throw new Error(`Error received from lbrynet.  Please start lbry and try again. Error: ${error}`);
+        throw error
       })
   })
   .then(() => {
-      return inquirer.prompt(siteQuestions);
+      return inquirer.prompt(siteQuestions(port, title, host, uploadDirectory));
   })
   .then(results => {
-      let siteResponses;
-      siteResponses = {
-          analytics: {
-              googleId: results.googleId,
-          },
-          assetDefaults: {
-              title      : results.defaultAssetTitle,
-              description: results.defaultAssetDescription,
-              thumbnail  : results.defaultAssetThumbnail,
-          },
-          auth: {
-              sessionKey: results.sessionKey,
-          },
-          details: {
-              port       : results.port,
-              title      : results.title,
-              host       : results.host,
-              description: results.description,
-              twitter    : results.twitter,
-          },
-          publishing: {
-              primaryClaimAddress,
-              uploadDirectory         : results.uploadDirectory,
-              thumbnailChannel,
-              thumbnailChannelId,
-              additionalClaimAddresses: [],
-              disabled                : false,
-              disabledMessage         : 'Please check back soon',
-          },
-      };
-      const fileLocation = Path.resolve(__dirname, '../config/siteConfig.json');
-      const fileContents = JSON.stringify(siteResponses, null, 2);
-      fs.writeFileSync(fileLocation, fileContents, 'utf-8');
+    console.log('\nCreating site config file...');
+    siteConfig['details']['port'] = results.port;
+    siteConfig['details']['title'] = results.title;
+    siteConfig['details']['host'] = results.host;
+    siteConfig['publishing']['uploadDirectory'] = results.uploadDirectory;
+    const fileLocation = Path.resolve(__dirname, '../config/siteConfig.json');
+    const fileContents = JSON.stringify(siteConfig, null, 2);
+    fs.writeFileSync(fileLocation, fileContents, 'utf-8');
+    console.log('Successfully created /config/siteConfig.json\n');
   })
   .then(() => {
-      return inquirer.prompt(slackQuestions);
-  })
-  .then(results => {
-      const fileLocation = Path.resolve(__dirname, '../config/slackConfig.json');
-      const fileContents = JSON.stringify(results, null, 2);
-      fs.writeFileSync(fileLocation, fileContents, 'utf-8');
-  })
-  .then(() => {
-      console.log('All done!');
+      console.log('\nYou\'re all done!');
+    console.log('Next step: run "npm run start:dev" to start your server!');
+      console.log('If you want to change any settings, you can edit the files in the "/config" folder.');
       process.exit(0);
   })
   .catch(error => {
+    if (error.code === 'ECONNREFUSED') {
+      console.log('Error: could not connect to LBRY.  Please make sure lbrynet daemon is running.');
+      process.exit(1);
+    } else {
       console.log(error);
       process.exit(1);
+    }
   });
