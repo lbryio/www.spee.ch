@@ -3,7 +3,6 @@ const fs = require('fs');
 const createModuleAliases = require('./utils/createModuleAliases.js');
 
 const customAliases = createModuleAliases();
-console.log(customAliases);
 
 module.exports = {
   target: 'web',

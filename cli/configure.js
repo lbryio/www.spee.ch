@@ -11,10 +11,20 @@ let thumbnailChannelDefault = '@thumbnails';
 let thumbnailChannel = '';
 let thumbnailChannelId = '';
 
-let mysqlConfig = require('../config/mysqlConfig.json');
+let mysqlConfig;
+try {
+  mysqlConfig = require('../config/mysqlConfig.json');
+} catch (error) {
+  mysqlConfig = require('./defaults/mysqlConfig.json')
+}
 const { database: mysqlDatabase, username: mysqlUsername, password: mysqlPassword } = mysqlConfig;
 
-let siteConfig = require('../config/siteConfig.json');
+let siteConfig;
+try {
+  siteConfig = require('../config/siteConfig.json');
+} catch (error) {
+  siteConfig = require('./defaults/siteConfig.json');
+}
 const { details : { port, title, host}, publishing: { uploadDirectory }} = siteConfig;
 
 inquirer
