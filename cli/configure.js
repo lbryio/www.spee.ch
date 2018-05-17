@@ -53,10 +53,9 @@ inquirer
     console.log('\nChecking to see if a LBRY channel exists for thumbnails...');
     // see if a channel name already exists in the configs
     const { publishing } = siteConfig;
-    const foundConfigThumbChannelUri = `${publishing.thumbnailChannel}#${publishing.thumbnailChannelId}`;
-    console.log(`Thumbnail channel in configs: ${foundConfigThumbChannelUri}.`);
     thumbnailChannel = publishing.thumbnailChannel;
     thumbnailChannelId = publishing.thumbnailChannelId;
+    console.log(`Thumbnail channel in configs: ${thumbnailChannel}#${thumbnailChannelId}.`);
     // see if channel exists in the wallet
     return axios
       .post('http://localhost:5279', {
@@ -79,6 +78,8 @@ inquirer
                 console.log('Channel was not mine');
                 continue;
               }
+              console.log('name:', foundChannel.name);
+              console.log('claim_id:', foundChannel.claim_id);
               if (foundChannel.name === thumbnailChannel && foundChannel.claim_id === thumbnailChannelId) {
                 console.log('No update to existing thumbnail config required\n');
               } else {

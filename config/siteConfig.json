@@ -19,9 +19,9 @@
   },
   "publishing": {
     "primaryClaimAddress": null,
-    "uploadDirectory": "ffff",
+    "uploadDirectory": "home/stuff/suff",
     "thumbnailChannel": "@thumbnails",
-    "thumbnailChannelId": "a9bee7aa09811d2f7efb99243aeab3713b73b4dc",
+    "thumbnailChannelId": "7ce4c451f05529949ff9b56de10e7f467d373f1b",
     "additionalClaimAddresses": [],
     "disabled": false,
     "disabledMessage": "Default publishing disabled message"

@@ -32,6 +32,15 @@ const uploadDirectory = (defaultAnswer) => {
    message: 'Enter a directory where uploads should be stored.',
    default: defaultAnswer,
    name: 'uploadDirectory',
+   validate (input) {
+     // make sure the directory exists
+     return new Promise((resolve, reject) => {
+       setTimeout(function() {
+         console.log('input received:', input);
+         resolve(true);
+       }, 3000);
+     })
+   }
  };
 };
 
