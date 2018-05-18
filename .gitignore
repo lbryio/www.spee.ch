@@ -4,3 +4,5 @@ node_modules/
 ./index.js.map
 public/bundle/bundle.js
 public/bundle/bundle.js.map
+config/mysqlConfig.json
+config/siteConfig.json
