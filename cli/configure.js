@@ -52,6 +52,7 @@ inquirer
 
           primaryClaimAddress = response.data.result[0];
           console.log('Primary claim address:', primaryClaimAddress, '!\n');
+          siteConfig['publishing']['primaryClaimAddress'] = primaryClaimAddress;
           return;
         }
         throw new Error('No data received from lbrynet');
