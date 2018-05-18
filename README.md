@@ -40,11 +40,6 @@ Configure your project
 $ cd <name of your project>
 $ npm run configure
 ```
-  
-(optional) add custom components and update the styles
-
-  * create custom components by creating React components in `src/views/` (further instructions coming soon)
-  * update the css by changing the files in `public/assets/css/` (further instructions and refactor coming soon) 
 
 ### Starting the app
 
@@ -56,11 +51,17 @@ build & start server
 ```
 npm run start:dev
 ```
+### View in browser
 visit [localhost:3000](http://localhost:3000) in your browser
 
-have fun
+have fun!
 
-### Syncing the blockchain
+### (optional) add custom components and update the styles
+
+  * create custom components by creating React components in `src/views/` (further instructions coming soon)
+  * update the css by changing the files in `public/assets/css/` (further instructions and refactor coming soon) 
+
+### (optional) Syncing the full blockchain
 Start the `spee.ch-sync` tool available at [billbitt/spee.ch-sync](https://github.com/billbitt/spee.ch-sync)
 
 This is not necessary, but highly reccomended.  It will decode the blocks of the `LBRY` blockchain and add the claims information to your database's tables
