@@ -27,42 +27,38 @@ Start lbry
 
   * install the [`lbry`](https://github.com/lbryio/lbry) daemon
   * start the `lbry` daemon
+  * retrieve an address from the daemon and send your wallet a couple credits (or join us in the [#speech discord channel](https://discord.gg/YjYbwhS) and we will send you a few)
   
 Clone this repo
 ```
-git clone https://github.com/lbryio/www.spee.ch.git
+$ git clone https://github.com/lbryio/www.spee.ch.git <name of your project>
 ```
 
-Configure the config files in `config/`
+Configure your project
 
-  * create `mysqlConfig.js` from `mysqlConfig.js.example` 
-      * enter the mysql database and credentials created above
-  * create `siteConfig.js` from `siteConfig.js.example` 
-      * note: you will need to enter a wallet address, which can be retried from your `lbry` daemon
-  * create `slackConfig.js` from `slackConfig.js.example`
+```
+$ cd <name of your project>
+$ npm run configure
+```
   
-(optional) add custom components and styles
+(optional) add custom components and update the styles
 
-  * create custom components by creating React components in `custom/` (further instructions coming soon)
+  * create custom components by creating React components in `src/views/` (further instructions coming soon)
   * update the css by changing the files in `public/assets/css/` (further instructions and refactor coming soon) 
 
 ### Starting the app
 
-(1) install dependencies
+install dependencies
 ```
 npm install
 ```
-(2) build the server
+build & start server
 ```
-npm run build
+npm run start:dev
 ```
-(3) start the server
-```
-npm run start
-```
-(4) visit [localhost:3000](http://localhost:3000)
+visit [localhost:3000](http://localhost:3000) in your browser
 
-(5) have fun
+have fun
 
 ### Syncing the blockchain
 Start the `spee.ch-sync` tool available at [billbitt/spee.ch-sync](https://github.com/billbitt/spee.ch-sync)
