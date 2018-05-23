@@ -30,6 +30,7 @@ module.exports = () => {
   moduleAliases['@pages'] = resolve('node_modules/spee.ch/client/build/pages');
   moduleAliases['@containers'] = resolve('node_modules/spee.ch/client/build/containers');
   moduleAliases['@components'] = resolve('node_modules/spee.ch/client/build/components');
+  moduleAliases['@actions'] = resolve('node_modules/spee.ch/client/build/actions');
   moduleAliases['@reducers'] = resolve('node_modules/spee.ch/client/build/reducers');
   moduleAliases['@sagas'] = resolve('node_modules/spee.ch/client/build/sagas');
   moduleAliases['@app'] = resolve('node_modules/spee.ch/client/build/app.js');
