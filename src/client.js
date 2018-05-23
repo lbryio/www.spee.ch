@@ -4,7 +4,10 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 import createSagaMiddleware from 'redux-saga';
-import { Reducers, Sagas, GAListener, App } from 'spee.ch-components';
+import Reducers from '@reducers';
+import Sagas from '@sagas';
+import App from '@app';
+import GAListener from '@components/GAListener';
 
 // configure the reducers by passing initial state configs
 const siteConfig = require('../config/siteConfig.json');

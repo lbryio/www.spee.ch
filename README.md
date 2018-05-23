@@ -4,8 +4,7 @@
 
 Spee.ch is a web app that reads and publishes images and videos to and from the [LBRY](https://lbry.io/) blockchain.
 
-`www.spee.ch` uses the [spee.ch](https://github.com/lbryio/spee.ch) server codebase, and it also uses the [spee.ch-components](http://github.com/lbryio/spee.ch-components) library.
-The goal of this project is to provide an example of how you can import and configure spee.ch to quickly and easily create your own spee.ch-like website.
+`www.spee.ch` uses the [spee.ch](https://github.com/lbryio/spee.ch) codebase.  The goal of this project is to provide an example of how you can import and configure spee.ch to quickly and easily create your own spee.ch-like website.
 
 ## Stack
 
