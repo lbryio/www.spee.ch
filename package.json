@@ -54,7 +54,6 @@
     "module-alias": "^2.0.6",
     "nodemon": "^1.15.1",
     "spee.ch": "git://github.com/lbryio/spee.ch.git",
-    "spee.ch-components": "git://github.com/lbryio/spee.ch-components.git",
     "webpack": "^3.10.0",
     "webpack-merge": "^4.1.2",
     "webpack-node-externals": "^1.7.2",
