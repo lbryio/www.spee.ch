@@ -34,6 +34,11 @@ Clone this repo
 $ git clone https://github.com/lbryio/www.spee.ch.git <name of your project>
 ```
 
+install dependencies
+```
+npm install
+```
+
 Configure your project
 
 ```
@@ -42,11 +47,6 @@ $ npm run configure
 ```
 
 ### Starting the app
-
-install dependencies
-```
-npm install
-```
 build & start server
 ```
 npm run start:dev
