@@ -1,5 +1,6 @@
 const { statSync, existsSync, readdirSync } = require('fs');
 const { join, resolve } = require('path');
+const BUILD_ROOT = 'node_modules/spee.ch/client/build';
 
 const getFolders = path => {
   if (existsSync(path)) {
@@ -27,13 +28,13 @@ module.exports = () => {
   moduleAliases = addAlliasesForFolder('components', moduleAliases);
   moduleAliases = addAlliasesForFolder('pages', moduleAliases);
 // default aliases
-  moduleAliases['@pages'] = resolve('node_modules/spee.ch/client/build/pages');
-  moduleAliases['@containers'] = resolve('node_modules/spee.ch/client/build/containers');
-  moduleAliases['@components'] = resolve('node_modules/spee.ch/client/build/components');
-  moduleAliases['@actions'] = resolve('node_modules/spee.ch/client/build/actions');
-  moduleAliases['@reducers'] = resolve('node_modules/spee.ch/client/build/reducers');
-  moduleAliases['@sagas'] = resolve('node_modules/spee.ch/client/build/sagas');
-  moduleAliases['@app'] = resolve('node_modules/spee.ch/client/build/app.js');
+  moduleAliases['@pages'] = resolve(`${BUILD_ROOT}/pages`);
+  moduleAliases['@containers'] = resolve(`${BUILD_ROOT}/containers`);
+  moduleAliases['@components'] = resolve(`${BUILD_ROOT}/components`);
+  moduleAliases['@actions'] = resolve(`${BUILD_ROOT}/actions`);
+  moduleAliases['@reducers'] = resolve(`${BUILD_ROOT}/reducers`);
+  moduleAliases['@sagas'] = resolve(`${BUILD_ROOT}/sagas`);
+  moduleAliases['@app'] = resolve(`${BUILD_ROOT}/app.js`);
   // return finished aliases
   return moduleAliases;
 };
