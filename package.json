@@ -4,8 +4,8 @@
   "description": "A web app that uses the spee.ch codebase",
   "main": "server.js",
   "scripts": {
-    "transpile": "babel src -d lib",
-    "transpile:dev": "babel src -w -d lib",
+    "transpile": "babel src -d build",
+    "transpile:dev": "babel src -w -d build",
     "webpack": "webpack --config webpack.config.js",
     "webpack:dev": "webpack --config webpack.config.js --watch",
     "build": "builder concurrent transpile webpack",
