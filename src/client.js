@@ -9,6 +9,8 @@ import Sagas from '@sagas';
 import App from '@app';
 import GAListener from '@components/GAListener';
 
+import './node_modules/spee.ch/client/scss/all.scss';
+
 // configure the reducers by passing initial state configs
 const siteConfig = require('../config/siteConfig.json');
 // const customViews = require('../custom/views');
