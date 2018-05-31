@@ -1,8 +1,7 @@
 const Path = require('path');
 const fs = require('fs');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const createModuleAliases = require('./utils/createModuleAliases.js');
-const SCSS_ROOT = 'node_modules/spee.ch/client/scss/';
+const SCSS_ROOT = Path.join(__dirname, 'node_modules/spee.ch/client/scss/');
 
 const customAliases = createModuleAliases();
 
@@ -18,11 +17,19 @@ module.exports = {
     rules:[
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
+        use: ['style-loader','css-loader', 'sass-loader'],
       },
+      {
+        test: /\.(png|jpg|gif|ttf|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
+      }
     ]
   },
   resolve: {
@@ -34,7 +41,4 @@ module.exports = {
     alias: customAliases,
     extensions: ['.js', '.jsx', '.scss'],
   },
-  plugins: [
-    new ExtractTextPlugin("styles.css"),
-  ]
 };

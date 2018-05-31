@@ -20,6 +20,8 @@ var _app = _interopRequireDefault(require("@app"));
 
 var _GAListener = _interopRequireDefault(require("@components/GAListener"));
 
+require("all.scss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // configure the reducers by passing initial state configs
