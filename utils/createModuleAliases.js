@@ -23,12 +23,13 @@ const addAlliasesForFolder = (name, aliasObject) => { // components
 
 module.exports = () => {
   let moduleAliases = {};
+  // aliases for configs
+  moduleAliases['@config'] = resolve(`config`);
   // create specific aliases for locally defined components
   moduleAliases = addAlliasesForFolder('containers', moduleAliases);
   moduleAliases = addAlliasesForFolder('components', moduleAliases);
   moduleAliases = addAlliasesForFolder('pages', moduleAliases);
 // default aliases
-  moduleAliases['@config'] = resolve(`config`);
   moduleAliases['@pages'] = resolve(`${BUILD_ROOT}/pages`);
   moduleAliases['@containers'] = resolve(`${BUILD_ROOT}/containers`);
   moduleAliases['@components'] = resolve(`${BUILD_ROOT}/components`);
