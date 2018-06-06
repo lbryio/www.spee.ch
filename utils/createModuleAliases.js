@@ -28,6 +28,7 @@ module.exports = () => {
   moduleAliases = addAlliasesForFolder('components', moduleAliases);
   moduleAliases = addAlliasesForFolder('pages', moduleAliases);
 // default aliases
+  moduleAliases['@config'] = resolve(`${BUILD_ROOT}/config`);
   moduleAliases['@pages'] = resolve(`${BUILD_ROOT}/pages`);
   moduleAliases['@containers'] = resolve(`${BUILD_ROOT}/containers`);
   moduleAliases['@components'] = resolve(`${BUILD_ROOT}/components`);
