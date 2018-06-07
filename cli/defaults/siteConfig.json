@@ -8,7 +8,8 @@
     "thumbnail": "https://spee.ch/0e5d4e8f4086e13f5b9ca3f9648f518e5f524402/speechflag.png"
   },
   "auth": {
-    "sessionKey": "mysecretkeyword"
+    "sessionKey": "mysecretkeyword",
+    "masterPassword": "myMasterPassword"
   },
   "details": {
     "port": 3000,
