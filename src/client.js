@@ -9,13 +9,6 @@ import Sagas from '@sagas';
 import App from '@app';
 import GAListener from '@components/GAListener';
 
-// configure the reducers by passing initial state configs
-const siteConfig = require('../config/siteConfig.json');
-// const customViews = require('../custom/views');
-const MyReducers = Reducers(siteConfig);
-const MyApp = App;
-const MyGAListener = GAListener(siteConfig);
-
 // get the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__ || null;
 //
@@ -30,9 +23,9 @@ const reduxMiddleware = window.__REDUX_DEVTOOLS_EXTENSION__ ? compose(middleware
 // create the store
 let store;
 if (preloadedState) {
-    store = createStore(MyReducers, preloadedState, reduxMiddleware);
+    store = createStore(Reducers, preloadedState, reduxMiddleware);
 } else {
-    store = createStore(MyReducers, reduxMiddleware);
+    store = createStore(Reducers, reduxMiddleware);
 }
 
 sagaMiddleware.run(Sagas.rootSaga);
@@ -41,9 +34,9 @@ sagaMiddleware.run(Sagas.rootSaga);
 hydrate(
     <Provider store={store}>
         <BrowserRouter>
-            <MyGAListener>
-                <MyApp />
-            </MyGAListener>
+            <GAListener>
+                <App />
+            </GAListener>
         </BrowserRouter>
     </Provider>,
     document.getElementById('react-app')

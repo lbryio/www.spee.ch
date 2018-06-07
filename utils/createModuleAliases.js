@@ -23,6 +23,8 @@ const addAlliasesForFolder = (name, aliasObject) => { // components
 
 module.exports = () => {
   let moduleAliases = {};
+  // aliases for configs
+  moduleAliases['@config'] = resolve(`config`);
   // create specific aliases for locally defined components
   moduleAliases = addAlliasesForFolder('containers', moduleAliases);
   moduleAliases = addAlliasesForFolder('components', moduleAliases);
