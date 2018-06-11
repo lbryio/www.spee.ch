@@ -10,12 +10,12 @@ const getFolders = path => {
 };
 
 const addAlliasesForFolder = (name, aliasObject) => { // components
-  const folderPath = resolve(`lib/views/${name}`);
+  const folderPath = resolve(`build/views/${name}`);
   const components = getFolders(folderPath);
   for (let i = 0; i < components.length; i++) {
     let folderName = components[i];
     let aliasName = `@${name}/${folderName}`;
-    let aliasPath = resolve(`lib/views/${name}/${folderName}/index.js`);
+    let aliasPath = resolve(`build/views/${name}/${folderName}/index.js`);
     aliasObject[aliasName] = aliasPath;
   }
   return aliasObject;

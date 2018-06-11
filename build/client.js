@@ -20,6 +20,8 @@ var _app = _interopRequireDefault(require("@app"));
 
 var _GAListener = _interopRequireDefault(require("@components/GAListener"));
 
+require("all.scss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // get the state from a global variable injected into the server-generated HTML

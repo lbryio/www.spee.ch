@@ -9,9 +9,12 @@ import Sagas from '@sagas';
 import App from '@app';
 import GAListener from '@components/GAListener';
 
+// import scss so webpack will build it
+import 'all.scss';
+
 // get the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__ || null;
-//
+
 // Allow the passed state to be garbage-collected
 delete window.__PRELOADED_STATE__;
 
