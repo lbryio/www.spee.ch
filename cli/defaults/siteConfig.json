@@ -26,5 +26,9 @@
     "additionalClaimAddresses": [],
     "disabled": false,
     "disabledMessage": "Default publishing disabled message"
+  },
+  "startup": {
+    "performChecks": true,
+    "performUpdates": true
   }
 }
