@@ -12,6 +12,7 @@
     "masterPassword": "myMasterPassword"
   },
   "details": {
+    "ipAddress": "",
     "port": 3000,
     "title": "My Site",
     "host": "https://www.example.com",
